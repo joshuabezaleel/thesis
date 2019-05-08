@@ -89,113 +89,113 @@ public class Main {
 //		    System.out.println(entry.getKey() + "/" + entry.getValue());
 //		}
 		
-		System.out.println("This CLI program guide you through the process of making a OLAP cube structure\n");
-		String input;
-		// Dimensions definitions
-		do {
-			System.out.print("Input new Dimension (input \"end\" to end the process): ");
-			reader = new Scanner(System.in);
-			input = reader.nextLine();
-			
-			// Go to add hierarchies if input does not equal "end"
-			if(!input.equals("end")) {
-				dimensionName = input;
-				dimension = new Dimension(dimensionName);
-				do {
-					System.out.print("Input new Hierarchy for dimension "+dimensionName+" (input \"end\" to end the process): ");
-					reader = new Scanner(System.in);
-					input = reader.nextLine();
-					
-					// Go to add levels if input does not equal end
-					if(!input.equals("end")) {
-						hierarchyName = input;
-						hierarchy = new Hierarchy(hierarchyName);
-						do {
-							System.out.println("Input new Level for hierarchy "+hierarchyName+" (input \"end\" to end the process).");
-							System.out.print("The order of the input is from the lowest level to the highest level (ascending): ");
-							reader = new Scanner(System.in);
-							input = reader.nextLine();
-							
-							// Go to add level attributes if input does not equal end
-							if(!input.equals("end")) {
-								levelName = input;
-								level = new Level(levelName);
-//								System.out.println(levelName);
-								do {
-									System.out.println("Choose which Level Attributes from the columns below for level "+levelName +" (input \"end\" to end the process).");
-									System.out.println("The first Level Attributes chosen will be the Primary Attribute (identifier).");
-									for(int i=0;i<columns.length;i++) {
-										System.out.println(i+1+". "+columns[i]);
-									}
-									System.out.print("LevelAttribute chosen: ");
-									reader = new Scanner(System.in);
-									input = reader.nextLine();
-									if(!input.equals("end")) {
-										String tempLevelAttribute = columns[Integer.parseInt(input)-1];
-										level.levelAttributes.put(tempLevelAttribute,columnDataTypes.get(tempLevelAttribute));
-//										System.out.println(tempLevelAttribute+" "+columnDataTypes.get(tempLevelAttribute));
-									}
-								} while(!input.equals("end"));
-//								System.out.println(hierarchy.hierarchyName+levelName);
-								hierarchy.levels.add(level);
-								level = new Level(null);
-								input="";
-							}
-							
-						} while(!input.equals("end"));
-						dimension.hierarchies.add(hierarchy);
-						hierarchy = new Hierarchy(null);
-						input = "";
-					}
-					 
-
-				} while(!input.equals("end"));
-				dimensions.add(dimension);
-				dimension = new Dimension(null);
-				input = "";
-			}
-		} while(!input.equals("end"));
-		
-		// Measures definition
-		do {
-			System.out.println("Choose Measure from the columns below (input \"end\" to end the process): ");
-			for(int i=0;i<columns.length;i++) {
-				System.out.println(i+1+". "+columns[i]);
-			}
-			reader = new Scanner(System.in);
-			input = reader.nextLine();
-			if(!input.equals("end")) {
-				String tempMeasure = columns[Integer.parseInt(input)-1];
-				System.out.println("Choose AggregateFunction for the Measure "+tempMeasure);
-				System.out.println("1=sum, 2=avg, 3=count, 4=min, 5=max");
-				reader = new Scanner(System.in);
-				input = reader.nextLine();
-				switch (Integer.parseInt(input)) {
-					case 1:
-						measure = new Measure(tempMeasure,columnDataTypes.get(tempMeasure),"sum");
-						break;
-					case 2:
-						measure = new Measure(tempMeasure,columnDataTypes.get(tempMeasure),"avg");
-						break;
-					case 3:
-						measure = new Measure(tempMeasure,columnDataTypes.get(tempMeasure),"count");
-						break;
-					case 4:
-						measure = new Measure(tempMeasure,columnDataTypes.get(tempMeasure),"min");
-						break;
-					case 5:
-						measure = new Measure(tempMeasure,columnDataTypes.get(tempMeasure),"max");
-						break;
-				}
-				measures.add(measure);
-				measure = new Measure(null,null,null);
-				input = "";
-			}
-		} while(!input.equals("end"));
-		
-		System.out.println("End of creating cube structure process\n");
-		//once finished
-		reader.close();
+//		System.out.println("This CLI program guide you through the process of making a OLAP cube structure\n");
+//		String input;
+//		// Dimensions definitions
+//		do {
+//			System.out.print("Input new Dimension (input \"end\" to end the process): ");
+//			reader = new Scanner(System.in);
+//			input = reader.nextLine();
+//			
+//			// Go to add hierarchies if input does not equal "end"
+//			if(!input.equals("end")) {
+//				dimensionName = input;
+//				dimension = new Dimension(dimensionName);
+//				do {
+//					System.out.print("Input new Hierarchy for dimension "+dimensionName+" (input \"end\" to end the process): ");
+//					reader = new Scanner(System.in);
+//					input = reader.nextLine();
+//					
+//					// Go to add levels if input does not equal end
+//					if(!input.equals("end")) {
+//						hierarchyName = input;
+//						hierarchy = new Hierarchy(hierarchyName);
+//						do {
+//							System.out.println("Input new Level for hierarchy "+hierarchyName+" (input \"end\" to end the process).");
+//							System.out.print("The order of the input is from the lowest level to the highest level (ascending): ");
+//							reader = new Scanner(System.in);
+//							input = reader.nextLine();
+//							
+//							// Go to add level attributes if input does not equal end
+//							if(!input.equals("end")) {
+//								levelName = input;
+//								level = new Level(levelName);
+////								System.out.println(levelName);
+//								do {
+//									System.out.println("Choose which Level Attributes from the columns below for level "+levelName +" (input \"end\" to end the process).");
+//									System.out.println("The first Level Attributes chosen will be the Primary Attribute (identifier).");
+//									for(int i=0;i<columns.length;i++) {
+//										System.out.println(i+1+". "+columns[i]);
+//									}
+//									System.out.print("LevelAttribute chosen: ");
+//									reader = new Scanner(System.in);
+//									input = reader.nextLine();
+//									if(!input.equals("end")) {
+//										String tempLevelAttribute = columns[Integer.parseInt(input)-1];
+//										level.levelAttributes.put(tempLevelAttribute,columnDataTypes.get(tempLevelAttribute));
+////										System.out.println(tempLevelAttribute+" "+columnDataTypes.get(tempLevelAttribute));
+//									}
+//								} while(!input.equals("end"));
+////								System.out.println(hierarchy.hierarchyName+levelName);
+//								hierarchy.levels.add(level);
+//								level = new Level(null);
+//								input="";
+//							}
+//							
+//						} while(!input.equals("end"));
+//						dimension.hierarchies.add(hierarchy);
+//						hierarchy = new Hierarchy(null);
+//						input = "";
+//					}
+//					 
+//
+//				} while(!input.equals("end"));
+//				dimensions.add(dimension);
+//				dimension = new Dimension(null);
+//				input = "";
+//			}
+//		} while(!input.equals("end"));
+//		
+//		// Measures definition
+//		do {
+//			System.out.println("Choose Measure from the columns below (input \"end\" to end the process): ");
+//			for(int i=0;i<columns.length;i++) {
+//				System.out.println(i+1+". "+columns[i]);
+//			}
+//			reader = new Scanner(System.in);
+//			input = reader.nextLine();
+//			if(!input.equals("end")) {
+//				String tempMeasure = columns[Integer.parseInt(input)-1];
+//				System.out.println("Choose AggregateFunction for the Measure "+tempMeasure);
+//				System.out.println("1=sum, 2=avg, 3=count, 4=min, 5=max");
+//				reader = new Scanner(System.in);
+//				input = reader.nextLine();
+//				switch (Integer.parseInt(input)) {
+//					case 1:
+//						measure = new Measure(tempMeasure,columnDataTypes.get(tempMeasure),"sum");
+//						break;
+//					case 2:
+//						measure = new Measure(tempMeasure,columnDataTypes.get(tempMeasure),"avg");
+//						break;
+//					case 3:
+//						measure = new Measure(tempMeasure,columnDataTypes.get(tempMeasure),"count");
+//						break;
+//					case 4:
+//						measure = new Measure(tempMeasure,columnDataTypes.get(tempMeasure),"min");
+//						break;
+//					case 5:
+//						measure = new Measure(tempMeasure,columnDataTypes.get(tempMeasure),"max");
+//						break;
+//				}
+//				measures.add(measure);
+//				measure = new Measure(null,null,null);
+//				input = "";
+//			}
+//		} while(!input.equals("end"));
+//		
+//		System.out.println("End of creating cube structure process\n");
+//		//once finished
+//		reader.close();
 		
 		// Printing the cube data structure
 //		for(int i=0;i<dimensions.size();i++) {
@@ -225,127 +225,127 @@ public class Main {
 		 */
 		
 		// Setting up
-		ModelBuilder builder = new ModelBuilder();
-		FileOutputStream out = new FileOutputStream("/home/jobel/undergrad_thesis/software_and_data/data/thesis-1/eclipse_output/"+fileName+".ttl");
-		
-		// Setting namespaces
-		builder.setNamespace("data","http://example.com/data/");
-		builder.setNamespace("schema","http://example.com/schema/");
-		builder.setNamespace("property","http://example.com/property/");
-		builder.setNamespace(RDF.NS);
-		builder.setNamespace(RDFS.NS);
-		builder.setNamespace("xsd","http://www.w3.org/2001/XMLSchema#");
-		builder.setNamespace("qb","http://purl.org/linked-data/cube#");
-		builder.setNamespace("qb4o","http://purl.org/qb4olap/cubes#");
-		
-		// CubeDataSet
-		builder.subject("data:"+fileName+"CubeDataSet")
-			.add(RDF.TYPE, "qb:DataSet")
-			.add("qb:structure", "schema:"+fileName+"CubeDataStructureDefinition");
-		
-		// CubeDataStructureDefinition
-		ValueFactory vf = SimpleValueFactory.getInstance();
-		builder.subject("schema:"+fileName+"CubeDataStructureDefinition")
-			.add(RDF.TYPE, "qb:DataStructureDefinition");
-		
-		// CubeComponents
-		// Dimension
-		for(int i=0; i<dimensions.size();i++) {
-			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
-				String lowestLevel = dimensions.get(i).hierarchies.get(j).getLowestLevel().levelName;
-				BNode component = vf.createBNode();
-				builder.subject("schema:"+fileName+"CubeDataStructureDefinition")
-					.add("qb:component", component)
-				.subject(component)
-					.add("qb:level","schema:"+lowestLevel)
-					.add("qb4o:cardinality", "qb4o:ManyToOne");
-			}
-		}
-		// Measure
-		for(int i=0;i<measures.size();i++) {
-			BNode component = vf.createBNode();
-			builder.subject("schema:"+fileName+"CubeDataStructureDefinition")
-				.add("qb:component", component)
-			.subject(component)
-				.add("qb:measure", "schema:"+measures.get(i).measureName)
-				.add("qb4o:aggregateFunction", "qb4o:"+measures.get(i).measureAggregateFunction);
-		}
-		
-		// Measures definition (measureProperty)
-		for(int i=0; i<measures.size(); i++) {
-			builder.subject("schema:"+measures.get(i).measureName)
-				.add(RDF.TYPE, "qb:MeasureProperty")
-				.add(RDFS.RANGE, "xsd:"+measures.get(i).measureDataType);
-		}
-		
-		// Dimension definition (dimensionProperty)
-		for(int i=0;i<dimensions.size();i++) {
-//			System.out.println("Dimension = "+dimensions.get(i).dimensionName);
-			// DimensionProperty
-			builder.add("schema:"+dimensions.get(i).dimensionName+"Dimension",RDF.TYPE, "qb:DimensionProperty");
-			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
-				// hasHierarchy
-				builder.add("schema:"+dimensions.get(i).dimensionName+"Dimension", "qb4o:hasHierarchy","schema:"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy");
-				// Hierarchy
-				builder.subject("schema:"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy")
-					.add(RDF.TYPE, "qb4o:Hierarchy")
-					// inDimension
-					.add("qb4o:inDimension", "schema:"+dimensions.get(i).dimensionName+"Dimension");
-				for(int k=0;k<dimensions.get(i).hierarchies.get(j).levels.size();k++) {
-					// hasLevel
-					builder.add("schema:"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy","qb4o:hasLevel","schema:"+dimensions.get(i).hierarchies.get(j).levels.get(k).levelName);
-					// LevelProperty
-					builder.add("schema:"+dimensions.get(i).hierarchies.get(j).levels.get(k).levelName,RDF.TYPE, "qb4o:LevelProperty");
-					for(Map.Entry<String, String> levelAttribute : dimensions.get(i).hierarchies.get(j).levels.get(k).levelAttributes.entrySet()) {
-						// hasAttribute
-						builder.add("schema:"+dimensions.get(i).hierarchies.get(j).levels.get(k).levelName, "qb4o:hasAttribute","property:"+levelAttribute.getKey()+"Property");
-						// LevelAttribute
-						builder.add("property:"+levelAttribute.getKey()+"Property",RDF.TYPE,"qb4o:LevelAttribute");
-						// rdfs:range
-						builder.add("property:"+levelAttribute.getKey()+"Property",RDFS.RANGE,"xsd:"+levelAttribute.getValue());
-					}
-				}
-				
-			}
-			
-			// RollupProperty and HierarchyStep
-			System.out.println(dimensions.get(i).dimensionName+" Dimension Hierarchies size = " + Integer.toString(dimensions.get(i).hierarchies.size()-1));
-			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
-//				System.out.println("j = " + j);
-//				System.out.println("dimensions.get(i).hierarchies.size()-1 = " + Integer.toString(dimensions.get(i).hierarchies.size()-1));
-				for(int k=0;k<dimensions.get(i).hierarchies.get(j).levels.size()-1;k++) {
-					System.out.println("Dimension = "+dimensions.get(i).dimensionName);
-					System.out.println("Hierarchy = "+dimensions.get(i).hierarchies.get(j).hierarchyName);
-					System.out.println("Level = "+dimensions.get(i).hierarchies.get(j).levels.get(k).levelName);
-					System.out.println("k = " + k);
-					System.out.println("dimensions.get(i).hierarchies.get(j).levels.size()-1 = " + Integer.toString(dimensions.get(i).hierarchies.get(j).levels.size()-1));
-					// RollupProperty
-					builder.add("schema:"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-Rollup"+j,RDF.TYPE,"qb4o:RollupProperty");
-					// HierarchyStep
-					builder.subject("schema:"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-Step"+j)
-						.add(RDF.TYPE, "qb4o:HierarchyStep")
-						.add("qb4o:inHierarchy", "schema:"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy")
-						.add("qb4o:pcCardinality", "qb4o:ManyToOne")
-						.add("qb4o:rollup","schema:"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-Rollup"+j)
-					// childLevel and parentLevel
-						.add("qb4o:childLevel", "schema:"+dimensions.get(i).hierarchies.get(j).levels.get(k).levelName)
-						.add("qb4o:parentLevel", "schema:"+dimensions.get(i).hierarchies.get(j).levels.get(k+1).levelName);
-				}
-			}
-		}
-		
-		// Writing to the file
-		org.eclipse.rdf4j.model.Model model = builder.build();
-		try {
-			Rio.write(model, out, RDFFormat.TURTLE);
-		} finally {
-			try {
-				out.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//		ModelBuilder builder = new ModelBuilder();
+//		FileOutputStream out = new FileOutputStream("/home/jobel/undergrad_thesis/software_and_data/data/thesis-1/eclipse_output/"+fileName+".ttl");
+//		
+//		// Setting namespaces
+//		builder.setNamespace("data","http://example.com/data/");
+//		builder.setNamespace("schema","http://example.com/schema/");
+//		builder.setNamespace("property","http://example.com/property/");
+//		builder.setNamespace(RDF.NS);
+//		builder.setNamespace(RDFS.NS);
+//		builder.setNamespace("xsd","http://www.w3.org/2001/XMLSchema#");
+//		builder.setNamespace("qb","http://purl.org/linked-data/cube#");
+//		builder.setNamespace("qb4o","http://purl.org/qb4olap/cubes#");
+//		
+//		// CubeDataSet
+//		builder.subject("data:"+fileName+"CubeDataSet")
+//			.add(RDF.TYPE, "qb:DataSet")
+//			.add("qb:structure", "schema:"+fileName+"CubeDataStructureDefinition");
+//		
+//		// CubeDataStructureDefinition
+//		ValueFactory vf = SimpleValueFactory.getInstance();
+//		builder.subject("schema:"+fileName+"CubeDataStructureDefinition")
+//			.add(RDF.TYPE, "qb:DataStructureDefinition");
+//		
+//		// CubeComponents
+//		// Dimension
+//		for(int i=0; i<dimensions.size();i++) {
+//			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
+//				String lowestLevel = dimensions.get(i).hierarchies.get(j).getLowestLevel().levelName;
+//				BNode component = vf.createBNode();
+//				builder.subject("schema:"+fileName+"CubeDataStructureDefinition")
+//					.add("qb:component", component)
+//				.subject(component)
+//					.add("qb:level","schema:"+lowestLevel)
+//					.add("qb4o:cardinality", "qb4o:ManyToOne");
+//			}
+//		}
+//		// Measure
+//		for(int i=0;i<measures.size();i++) {
+//			BNode component = vf.createBNode();
+//			builder.subject("schema:"+fileName+"CubeDataStructureDefinition")
+//				.add("qb:component", component)
+//			.subject(component)
+//				.add("qb:measure", "schema:"+measures.get(i).measureName)
+//				.add("qb4o:aggregateFunction", "qb4o:"+measures.get(i).measureAggregateFunction);
+//		}
+//		
+//		// Measures definition (measureProperty)
+//		for(int i=0; i<measures.size(); i++) {
+//			builder.subject("schema:"+measures.get(i).measureName)
+//				.add(RDF.TYPE, "qb:MeasureProperty")
+//				.add(RDFS.RANGE, "xsd:"+measures.get(i).measureDataType);
+//		}
+//		
+//		// Dimension definition (dimensionProperty)
+//		for(int i=0;i<dimensions.size();i++) {
+////			System.out.println("Dimension = "+dimensions.get(i).dimensionName);
+//			// DimensionProperty
+//			builder.add("schema:"+dimensions.get(i).dimensionName+"Dimension",RDF.TYPE, "qb:DimensionProperty");
+//			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
+//				// hasHierarchy
+//				builder.add("schema:"+dimensions.get(i).dimensionName+"Dimension", "qb4o:hasHierarchy","schema:"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy");
+//				// Hierarchy
+//				builder.subject("schema:"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy")
+//					.add(RDF.TYPE, "qb4o:Hierarchy")
+//					// inDimension
+//					.add("qb4o:inDimension", "schema:"+dimensions.get(i).dimensionName+"Dimension");
+//				for(int k=0;k<dimensions.get(i).hierarchies.get(j).levels.size();k++) {
+//					// hasLevel
+//					builder.add("schema:"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy","qb4o:hasLevel","schema:"+dimensions.get(i).hierarchies.get(j).levels.get(k).levelName);
+//					// LevelProperty
+//					builder.add("schema:"+dimensions.get(i).hierarchies.get(j).levels.get(k).levelName,RDF.TYPE, "qb4o:LevelProperty");
+//					for(Map.Entry<String, String> levelAttribute : dimensions.get(i).hierarchies.get(j).levels.get(k).levelAttributes.entrySet()) {
+//						// hasAttribute
+//						builder.add("schema:"+dimensions.get(i).hierarchies.get(j).levels.get(k).levelName, "qb4o:hasAttribute","property:"+levelAttribute.getKey()+"Property");
+//						// LevelAttribute
+//						builder.add("property:"+levelAttribute.getKey()+"Property",RDF.TYPE,"qb4o:LevelAttribute");
+//						// rdfs:range
+//						builder.add("property:"+levelAttribute.getKey()+"Property",RDFS.RANGE,"xsd:"+levelAttribute.getValue());
+//					}
+//				}
+//				
+//			}
+//			
+//			// RollupProperty and HierarchyStep
+//			System.out.println(dimensions.get(i).dimensionName+" Dimension Hierarchies size = " + Integer.toString(dimensions.get(i).hierarchies.size()-1));
+//			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
+////				System.out.println("j = " + j);
+////				System.out.println("dimensions.get(i).hierarchies.size()-1 = " + Integer.toString(dimensions.get(i).hierarchies.size()-1));
+//				for(int k=0;k<dimensions.get(i).hierarchies.get(j).levels.size()-1;k++) {
+//					System.out.println("Dimension = "+dimensions.get(i).dimensionName);
+//					System.out.println("Hierarchy = "+dimensions.get(i).hierarchies.get(j).hierarchyName);
+//					System.out.println("Level = "+dimensions.get(i).hierarchies.get(j).levels.get(k).levelName);
+//					System.out.println("k = " + k);
+//					System.out.println("dimensions.get(i).hierarchies.get(j).levels.size()-1 = " + Integer.toString(dimensions.get(i).hierarchies.get(j).levels.size()-1));
+//					// RollupProperty
+//					builder.add("schema:"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-Rollup"+j,RDF.TYPE,"qb4o:RollupProperty");
+//					// HierarchyStep
+//					builder.subject("schema:"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-Step"+j)
+//						.add(RDF.TYPE, "qb4o:HierarchyStep")
+//						.add("qb4o:inHierarchy", "schema:"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy")
+//						.add("qb4o:pcCardinality", "qb4o:ManyToOne")
+//						.add("qb4o:rollup","schema:"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-Rollup"+j)
+//					// childLevel and parentLevel
+//						.add("qb4o:childLevel", "schema:"+dimensions.get(i).hierarchies.get(j).levels.get(k).levelName)
+//						.add("qb4o:parentLevel", "schema:"+dimensions.get(i).hierarchies.get(j).levels.get(k+1).levelName);
+//				}
+//			}
+//		}
+//		
+//		// Writing to the file
+//		org.eclipse.rdf4j.model.Model model = builder.build();
+//		try {
+//			Rio.write(model, out, RDFFormat.TURTLE);
+//		} finally {
+//			try {
+//				out.close();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 		
 		/*
 		 * End of creating turtle file process
@@ -384,13 +384,13 @@ public class Main {
 		ModelMetaData virtualModel = new ModelMetaData();
 		virtualModel.setName("virtualModel");
 		virtualModel.setModelType(Model.Type.VIRTUAL);
-		System.out.println("testing");
-		for(Map.Entry<String, String> columnDataType : columnDataTypes.entrySet()) {
-			System.out.println(columnDataType.getKey()+" "+columnDataType.getValue());
-		}
-		for(Map.Entry<String, String> teiidDataType : teiidDataTypes.entrySet()) {
-			System.out.println(teiidDataType.getKey()+" "+teiidDataType.getValue());
-		}
+//		System.out.println("testing");
+//		for(Map.Entry<String, String> columnDataType : columnDataTypes.entrySet()) {
+//			System.out.println(columnDataType.getKey()+" "+columnDataType.getValue());
+//		}
+//		for(Map.Entry<String, String> teiidDataType : teiidDataTypes.entrySet()) {
+//			System.out.println(teiidDataType.getKey()+" "+teiidDataType.getValue());
+//		}
 		String teiidDDLView = "CREATE VIEW "+fileName+" (\n";
 		int tempIterator = 0;
 		for(Map.Entry<String, String> teiidDataType : teiidDataTypes.entrySet()) {
@@ -443,106 +443,106 @@ public class Main {
 		/*
 		 * Creating obda file
 		 */
-		FileWriter fw = new FileWriter("/home/jobel/undergrad_thesis/software_and_data/data/thesis-1/eclipse_output/"+fileName+".obda");
-		fw.write("[PrefixDeclaration]\n");
-		fw.write(":\t\t\t#\n");
-		fw.write("owl:\t\thttp://www.w3.org/2002/07/owl#\n");
-		fw.write("xml:\t\thttp://www.w3.org/XML/1998/namespace\n");
-		fw.write("xsd:\t\thttp://www.w3.org/2001/XMLSchema#\n");
-		fw.write("obda:\t\thttps://w3id.org/obda/vocabulary#\n");
-		fw.write("qb:\t\t\thttp://purl.org/linked-data/cube#\n");
-		fw.write("qb4o:\t\thttp://purl.org/qb4olap/cubes#\n");
-		fw.write("rdfs:\t\thttp://www.w3.org/2000/01/rdf-schema#\n");
-		fw.write("schema:\t\thttp://example.com/schema/\n");
-		fw.write("property:\thttp://example.com/property/\n");
-		fw.write("data:\t\thttp://example.com/data/\n");
-		fw.write("quest:\t\thttp://obda.org/quest#\n");
-		fw.write("\n");
-		fw.write("[MappingDeclaration] @collection [[\n");
-		
-		Level tempLevel = new Level(null);
-		Level nextLevel = new Level(null);
-		// Level members definition
-		for(int i=0;i<dimensions.size();i++) {
-			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
-				for(int k=0;k<dimensions.get(i).hierarchies.get(j).levels.size();k++) {
-					tempLevel = dimensions.get(i).hierarchies.get(j).levels.get(k);
-					// LevelMembers definition
-					fw.write("mappingId\tMAPID-"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-"+tempLevel.levelName+"Level-LevelMembers\n");
-					fw.write("target\t\tdata:"+tempLevel.levelName+"-{"+tempLevel.getPrimaryAttribute()+"} " + "qb4o:memberOf schema:"+tempLevel.levelName+" .\n");
-					fw.write("source\t\tselect distinct "+tempLevel.levelName+" from "+fileName+"\n");
-					fw.write("\n");
-					
-					// LevelAttribute definition
-					for(Map.Entry<String, String> levelAttribute : dimensions.get(i).hierarchies.get(j).levels.get(k).levelAttributes.entrySet()) {
-						fw.write("mappingId\tMAPID-"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-"+tempLevel.levelName+"Level-"+levelAttribute.getKey()+"LevelAttribute\n");
-						fw.write("target\t\tdata:"+tempLevel.levelName+"-{"+tempLevel.getPrimaryAttribute()+"} "
-								+ "property:"+levelAttribute.getKey()+"Property {"+levelAttribute.getKey()+"}^^xsd:"+levelAttribute.getValue()+" .\n");
-						fw.write("source\t\tselect distinct "+levelAttribute.getKey()+" from "+fileName+"\n");
-						fw.write("\n");
-					}
-					
-					// RollupProperty definition
-					// If this is not the last element, then add the next level as the upper level
-					if(k!=dimensions.get(i).hierarchies.get(j).levels.size()-1) {
-						nextLevel = dimensions.get(i).hierarchies.get(j).levels.get(k+1);
-						fw.write("mappingId\tMAPID-"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-"+tempLevel.levelName+"To"+nextLevel.levelName+"-RollupProperty\n");
-						fw.write("target\t\tdata:"+tempLevel.levelName+"-{"+tempLevel.getPrimaryAttribute()+"} " + "schema:"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-Rollup"+j+" data:"+nextLevel.levelName+"-{"+nextLevel.levelName+"} .\n");
-						fw.write("source\t\tselect distinct "+tempLevel.levelName+", "+nextLevel.levelName+" from "+fileName+"\n");
-						fw.write("\n");
-					}
-					nextLevel = new Level(null);
-//					dimensions.get(i).hierarchies.get(j).levels.get(k).getPrimaryAttribute()
-				}
-				tempLevel = new Level(null);
-			}
-		}
-		// Observation definition
-		String tempTarget = "target\t\tdata:obs-";
-		String tempSource = "source\t\tselect distinct ";
-//		List<String> primaryAttributes = new ArrayList<String>();
-		for(int i=0;i<dimensions.size();i++) {
-			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
-				tempTarget = tempTarget.concat("{"+dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+"}.");
-				tempSource = tempSource.concat(dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+", ");
-			}
-		}
-		// Delete the last "."
-		tempTarget = tempTarget.substring(0, tempTarget.length()-1);
-		// Delete the last ", "
-		tempSource = tempSource.substring(0, tempSource.length()-2);
-		
-		fw.write("mappingId\tMAPID-Observation\n");
-		fw.write(tempTarget+" a qb:Observation .\n");
-		fw.write(tempSource+"  from "+fileName+"\n");
-		fw.write("\n");
-		
-		// Observation CubeDataSet definition
-		fw.write("mappingId\tMAPID-Observation-CubeDataSetDefinition\n");
-		fw.write(tempTarget+" qb:dataSet data:"+fileName+"CubeDataSet .\n");
-		fw.write(tempSource+"  from "+fileName+"\n");
-		fw.write("\n");
-		
-		// Observation with LevelAttributes definition
-		for(int i=0;i<dimensions.size();i++) {
-			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
-				fw.write("mappingId\tMAPID-Observation-"+dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+"Level\n");
-				fw.write(tempTarget+" schema:"+dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+" data:"+dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+"-{"+dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+"} .\n");
-				fw.write(tempSource+" from "+fileName+"\n");
-				fw.write("\n");
-			}
-		}
-		
-		// Observation with Measures definition
-		for(int i=0;i<measures.size();i++) {
-			fw.write("mappingId\tMAPID-Observation-"+measures.get(i).measureName+"Measure\n");
-			fw.write(tempTarget+" schema:"+measures.get(i).measureName+" {"+measures.get(i).measureName+"}^^xsd:"+measures.get(i).measureDataType+" .\n");
-			fw.write(tempSource+", "+measures.get(i).measureName+" from "+fileName+"\n");
-			fw.write("\n");
-		}
-		
-		fw.write("]]");
-		fw.close();
+//		FileWriter fw = new FileWriter("/home/jobel/undergrad_thesis/software_and_data/data/thesis-1/eclipse_output/"+fileName+".obda");
+//		fw.write("[PrefixDeclaration]\n");
+//		fw.write(":\t\t\t#\n");
+//		fw.write("owl:\t\thttp://www.w3.org/2002/07/owl#\n");
+//		fw.write("xml:\t\thttp://www.w3.org/XML/1998/namespace\n");
+//		fw.write("xsd:\t\thttp://www.w3.org/2001/XMLSchema#\n");
+//		fw.write("obda:\t\thttps://w3id.org/obda/vocabulary#\n");
+//		fw.write("qb:\t\t\thttp://purl.org/linked-data/cube#\n");
+//		fw.write("qb4o:\t\thttp://purl.org/qb4olap/cubes#\n");
+//		fw.write("rdfs:\t\thttp://www.w3.org/2000/01/rdf-schema#\n");
+//		fw.write("schema:\t\thttp://example.com/schema/\n");
+//		fw.write("property:\thttp://example.com/property/\n");
+//		fw.write("data:\t\thttp://example.com/data/\n");
+//		fw.write("quest:\t\thttp://obda.org/quest#\n");
+//		fw.write("\n");
+//		fw.write("[MappingDeclaration] @collection [[\n");
+//		
+//		Level tempLevel = new Level(null);
+//		Level nextLevel = new Level(null);
+//		// Level members definition
+//		for(int i=0;i<dimensions.size();i++) {
+//			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
+//				for(int k=0;k<dimensions.get(i).hierarchies.get(j).levels.size();k++) {
+//					tempLevel = dimensions.get(i).hierarchies.get(j).levels.get(k);
+//					// LevelMembers definition
+//					fw.write("mappingId\tMAPID-"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-"+tempLevel.levelName+"Level-LevelMembers\n");
+//					fw.write("target\t\tdata:"+tempLevel.levelName+"-{"+tempLevel.getPrimaryAttribute()+"} " + "qb4o:memberOf schema:"+tempLevel.levelName+" .\n");
+//					fw.write("source\t\tselect distinct "+tempLevel.levelName+" from "+fileName+"\n");
+//					fw.write("\n");
+//					
+//					// LevelAttribute definition
+//					for(Map.Entry<String, String> levelAttribute : dimensions.get(i).hierarchies.get(j).levels.get(k).levelAttributes.entrySet()) {
+//						fw.write("mappingId\tMAPID-"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-"+tempLevel.levelName+"Level-"+levelAttribute.getKey()+"LevelAttribute\n");
+//						fw.write("target\t\tdata:"+tempLevel.levelName+"-{"+tempLevel.getPrimaryAttribute()+"} "
+//								+ "property:"+levelAttribute.getKey()+"Property {"+levelAttribute.getKey()+"}^^xsd:"+levelAttribute.getValue()+" .\n");
+//						fw.write("source\t\tselect distinct "+levelAttribute.getKey()+" from "+fileName+"\n");
+//						fw.write("\n");
+//					}
+//					
+//					// RollupProperty definition
+//					// If this is not the last element, then add the next level as the upper level
+//					if(k!=dimensions.get(i).hierarchies.get(j).levels.size()-1) {
+//						nextLevel = dimensions.get(i).hierarchies.get(j).levels.get(k+1);
+//						fw.write("mappingId\tMAPID-"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-"+tempLevel.levelName+"To"+nextLevel.levelName+"-RollupProperty\n");
+//						fw.write("target\t\tdata:"+tempLevel.levelName+"-{"+tempLevel.getPrimaryAttribute()+"} " + "schema:"+dimensions.get(i).dimensionName+"Dimension-"+dimensions.get(i).hierarchies.get(j).hierarchyName+"Hierarchy-Rollup"+j+" data:"+nextLevel.levelName+"-{"+nextLevel.levelName+"} .\n");
+//						fw.write("source\t\tselect distinct "+tempLevel.levelName+", "+nextLevel.levelName+" from "+fileName+"\n");
+//						fw.write("\n");
+//					}
+//					nextLevel = new Level(null);
+////					dimensions.get(i).hierarchies.get(j).levels.get(k).getPrimaryAttribute()
+//				}
+//				tempLevel = new Level(null);
+//			}
+//		}
+//		// Observation definition
+//		String tempTarget = "target\t\tdata:obs-";
+//		String tempSource = "source\t\tselect distinct ";
+////		List<String> primaryAttributes = new ArrayList<String>();
+//		for(int i=0;i<dimensions.size();i++) {
+//			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
+//				tempTarget = tempTarget.concat("{"+dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+"}.");
+//				tempSource = tempSource.concat(dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+", ");
+//			}
+//		}
+//		// Delete the last "."
+//		tempTarget = tempTarget.substring(0, tempTarget.length()-1);
+//		// Delete the last ", "
+//		tempSource = tempSource.substring(0, tempSource.length()-2);
+//		
+//		fw.write("mappingId\tMAPID-Observation\n");
+//		fw.write(tempTarget+" a qb:Observation .\n");
+//		fw.write(tempSource+"  from "+fileName+"\n");
+//		fw.write("\n");
+//		
+//		// Observation CubeDataSet definition
+//		fw.write("mappingId\tMAPID-Observation-CubeDataSetDefinition\n");
+//		fw.write(tempTarget+" qb:dataSet data:"+fileName+"CubeDataSet .\n");
+//		fw.write(tempSource+"  from "+fileName+"\n");
+//		fw.write("\n");
+//		
+//		// Observation with LevelAttributes definition
+//		for(int i=0;i<dimensions.size();i++) {
+//			for(int j=0;j<dimensions.get(i).hierarchies.size();j++) {
+//				fw.write("mappingId\tMAPID-Observation-"+dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+"Level\n");
+//				fw.write(tempTarget+" schema:"+dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+" data:"+dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+"-{"+dimensions.get(i).hierarchies.get(j).getLowestLevel().getPrimaryAttribute()+"} .\n");
+//				fw.write(tempSource+" from "+fileName+"\n");
+//				fw.write("\n");
+//			}
+//		}
+//		
+//		// Observation with Measures definition
+//		for(int i=0;i<measures.size();i++) {
+//			fw.write("mappingId\tMAPID-Observation-"+measures.get(i).measureName+"Measure\n");
+//			fw.write(tempTarget+" schema:"+measures.get(i).measureName+" {"+measures.get(i).measureName+"}^^xsd:"+measures.get(i).measureDataType+" .\n");
+//			fw.write(tempSource+", "+measures.get(i).measureName+" from "+fileName+"\n");
+//			fw.write("\n");
+//		}
+//		
+//		fw.write("]]");
+//		fw.close();
 		
 		/*
 		 * End of creating obda file
@@ -565,13 +565,13 @@ public class Main {
 		 * Creating properties file
 		 */
 		
-		FileWriter fw2 = new FileWriter("/home/jobel/undergrad_thesis/software_and_data/data/thesis-1/eclipse_output/"+fileName+".docker.properties");
-		fw2.write("jdbc.url=jdbc\\:teiid\\:"+fileName+".1@mm\\://172.17.0.1\\:31000\n");
-		fw2.write("jdbc.driver=org.teiid.jdbc.TeiidDriver\n");
-		fw2.write("jdbc.user=usernew\n");
-		fw2.write("jdbc.name=\n");
-		fw2.write("jdbc.password=user1664!");
-		fw2.close();
+//		FileWriter fw2 = new FileWriter("/home/jobel/undergrad_thesis/software_and_data/data/thesis-1/eclipse_output/"+fileName+".docker.properties");
+//		fw2.write("jdbc.url=jdbc\\:teiid\\:"+fileName+".1@mm\\://172.17.0.1\\:31000\n");
+//		fw2.write("jdbc.driver=org.teiid.jdbc.TeiidDriver\n");
+//		fw2.write("jdbc.user=usernew\n");
+//		fw2.write("jdbc.name=\n");
+//		fw2.write("jdbc.password=user1664!");
+//		fw2.close();
 		
 		
 		/*
@@ -583,7 +583,24 @@ public class Main {
 		 */
 		Properties connectionProps = new Properties();
 		// (!!!) pathnya diambil dari filepath
-		connectionProps.setProperty("ParentDirectory", filePath.substring(filePath.lastIndexOf("/")+1));
+		String asdf[] = filePath.split("/");
+		String qwe = "";
+		for(int i=0;i<asdf.length-1;i++) {
+			if(i!=0) {
+				qwe = qwe.concat("/");
+			}
+			qwe = qwe.concat(asdf[i]);
+		}
+		qwe = qwe.concat("/");
+		System.out.println("qwe = "+qwe);
+//		for (String asd : asdf) {
+//			qwe.concat(asd);
+//			if (!asd.equals(asdf[asdf.length]))
+//			qwe.concat("/");
+//		}
+		connectionProps.setProperty("ParentDirectory", qwe);
+//		System.out.println("asdfghjkl"+filePath.substring(filePath.lastIndexOf("/")+1));
+//		System.out.println(filePath);
 		connectionProps.setProperty("AllowParentPaths", "true");
 		connectionProps.setProperty("class-name", "org.teiid.resource.adapter.file.FileManagedConnectionFactory");
 		
